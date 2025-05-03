@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-  // baseURL: 'https://misogi-taskpal.vercel.app/api/v1',
+  // baseURL: 'https://form-builder-be-mu.vercel.app/api/v1',
   baseURL: 'http://localhost:4000/api/v1',
 })
 
@@ -29,7 +29,7 @@ export const loginUser = (userData: { email: string; password: string }) =>
 export const createForm = (formData: any) => API.post('/forms', formData)
 
 // Get All Forms
-export const getAllForms = () => API.get('/forms')
+export const getAllForms = (userId:any) => API.get(`/forms/userForms/${userId}`)
 
 // Get Form By Slug
 export const getFormBySlug = (slug: any) => API.get(`/forms/${slug}`)

@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllForms } from "../services/api";
 import IsLoading from "./IsLoading";
-import { capitalizeWord } from "../utils/utils";
+import { capitalizeWord, getLocalStorage } from "../utils/utils";
 
 const Dashboard = () => {
   // const forms = getAllForms()?.filter((ele: any) => ele?.slug != undefined);
   const [formData, setFormData] = useState([])
   const [loader, setLoader] = useState(false)
   const getForms = async () => {
-    setLoader(true)
-    const response = await getAllForms()
-    setFormData(response?.data?.data || [])
-    setLoader(false)
+    try {
+      setLoader(true)
+      const response = await getAllForms(getLocalStorage("user", true)?._id)
+      setFormData(response?.data?.data || [])
+      setLoader(false)
+    } catch (error) {
+      setLoader(false)
+    }
   }
   useEffect(() => { getForms() }, [])
 
@@ -31,7 +35,7 @@ const Dashboard = () => {
                 className="p-2 bg-white rounded shadow flex flex-col justify-between items-center"
               >
                 <div className="flex justify-start mb-2 ">
-                  <p className="font-semibold underline">{ capitalizeWord(form?.slug)}</p>
+                  <p className="font-semibold underline">{capitalizeWord(form?.slug)}</p>
                   {/* <p className="text-sm text-gray-500">/{form.slug}</p> */}
                 </div>
 

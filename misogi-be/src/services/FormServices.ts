@@ -29,7 +29,7 @@ export class FormServices
     return form
   }
 
-  public async getAllFormsByUser (userId: string) {
+  public async getAllFormsByUser (userId: string):Promise<IForm[]> {
     return await FormModel.find({ userId })
   }
 

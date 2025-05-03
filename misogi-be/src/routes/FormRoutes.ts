@@ -11,7 +11,7 @@ export class FormRoutes {
   }
 
   initializeRoutes() {
-    this.router.get("/", this.formController.getAllForm);
+    this.router.get("/formByUser", this.formController.getAllForm);
     this.router.get("/getFormBySlug", this.formController.getFormBySlug);
 
     this.router.post(
@@ -24,9 +24,8 @@ export class FormRoutes {
       this.formController.getFormById,
     );
 
-    this.router.delete(
-      "/userForms",
-
+    this.router.get(
+      "/userForms/:userId",
       this.formController.getUserForms,
     );
   }
