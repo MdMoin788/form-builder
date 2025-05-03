@@ -20,7 +20,7 @@ const FormCanvas = () => {
 
     const [, drop] = useDrop({
       accept: ItemType,
-      hover(item: any, monitor) {
+      hover(item: any) {
         if (!ref.current) return;
 
         const dragIndex = item.index;
