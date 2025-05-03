@@ -33,12 +33,14 @@ export const getAllForms = () => API.get('/forms')
 
 // Get Form By Slug
 export const getFormBySlug = (slug: any) => API.get(`/forms/${slug}`)
+export const getAllformResponsesByFormId = (formId: any) => API.get(`/responses/${formId}`)
+export const getFormById = (formId: any) => API.get(`/forms/getFormById/${formId}`)
 
 // ----- 📍 RESPONSES APIs -----
 
 // Save Form Response
-export const saveFormResponse = (formId: string, responseData: any) =>
-  API.post(`/responses/${formId}`, responseData)
+export const saveFormResponse = (responseData: any) =>
+  API.post(`/responses`, responseData)
 
 // Get Form Responses
 export const getFormResponses = (formId: any) =>

@@ -16,7 +16,7 @@ export interface IFormField {
 export interface IForm extends Document {
   userId: Types.ObjectId;
   slug: string;
-  title: string;
+  title?: string;
   fields: IFormField[];
   password?: string;
   status: 'open' | 'closed' | 'scheduled';
@@ -24,6 +24,7 @@ export interface IForm extends Document {
     open?: Date;
     close?: Date;
   };
+  responses?: any[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,7 +33,7 @@ const FormSchema = new Schema<IForm>(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     slug: { type: String, required: true, unique: true },
-    title: { type: String, required: true },
+    title: { type: String },
     fields: [
       {
         id: { type: String, required: true },
@@ -42,8 +43,14 @@ const FormSchema = new Schema<IForm>(
         required: { type: Boolean },
         options: [{ type: String }],
         conditional: {
-          fieldId: { type: String },
-          value: { type: String },
+          type: new Schema(
+            {
+              fieldId: { type: String },
+              value: { type: String },
+            },
+            { _id: false }
+          ),
+          required: false,
         },
       },
     ],
@@ -53,8 +60,10 @@ const FormSchema = new Schema<IForm>(
       open: { type: Date },
       close: { type: Date },
     },
+    responses: [{ type: Schema.Types.Mixed }],
   },
   { timestamps: true, versionKey: false }
 );
 
 export const FormModel = model<IForm>('Form', FormSchema);
+

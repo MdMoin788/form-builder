@@ -11,7 +11,7 @@ export class ResponeController {
 
   public saveResponse = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const response = await this.responseService.saveResponse(req.params.slug, req.body.answers, req.body.email);
+      const response = await this.responseService.saveResponse(req.body);
       sendResponse(res, 200, response);
     } catch (err) {
       next(err);
@@ -20,7 +20,7 @@ export class ResponeController {
 
   public getResponses = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const responses = await this.responseService.getResponses(req.params.slug);
+      const responses = await this.responseService.getResponses(req.params.formId);
       sendResponse(res, 200, responses);
     } catch (err) {
       next(err);

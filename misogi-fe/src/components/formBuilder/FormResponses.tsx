@@ -1,23 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getFormBySlug, getResponsesBySlug } from "../../data/forms";
+import { getFormBySlug,} from "../../data/forms";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, ArcElement } from "chart.js";
+import IsLoading from "../../screens/IsLoading";
+import { getAllformResponsesByFormId } from "../../services/api";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, ArcElement);
 
 const FormResponses = () => {
-  const { slug } = useParams();
+  const { slug ,formId} = useParams();
   const form = getFormBySlug(slug || "");
-  const slugString = slug ?? "";
-  const allResponses = getResponsesBySlug(slugString);
-
+  // const slugString = slug ?? "";
+  // const allResponses = getResponsesBySlug(slugString);
+  const [allResponses, setAllResponses] = useState([])
+   const [loader, setLoader] = useState(false)
+ 
+   const getOpenForm = async () => {
+     try {
+       setLoader(true)
+       const response = await getAllformResponsesByFormId(formId)
+       setAllResponses(response?.data?.data)
+       setLoader(false)
+     } catch (error) {
+       setLoader(false)
+     }
+   }
+ 
+   useEffect(() => {
+     getOpenForm()
+     return () => { }
+   }, [])
+  
   
   const [dateFilter, setDateFilter] = useState({
     from: "",
     to: "",
   });
 
+  if (loader) {
+    return <IsLoading />
+  }
   if (!form) return <p className="p-6">Form not found!</p>;
 
   const filteredResponses = allResponses.filter((res: any) => {
@@ -127,15 +150,15 @@ const FormResponses = () => {
           );
         }
 
-        return (
-          <div key={field.id} className="space-y-2 mt-6">
-            <h4 className="font-semibold">{field.label} (Responses)</h4>
-            {fieldResponses.length === 0 && <p>No responses</p>}
-            {fieldResponses.map((resp: any, index: number) => (
-              <p key={index} className="bg-gray-100 p-2 rounded">{resp}</p>
-            ))}
-          </div>
-        );
+        // return (
+        //   <div key={field.id} className="space-y-2 mt-6">
+        //     <h4 className="font-semibold">{field.label} (Responses)</h4>
+        //     {fieldResponses.length === 0 && <p>No responses</p>}
+        //     {fieldResponses.map((resp: any, index: number) => (
+        //       <p key={index} className="bg-gray-100 p-2 rounded">{resp}</p>
+        //     ))}
+        //   </div>
+        // );
       })}
 
       <h3 className="text-xl font-bold mt-10">Responses Table</h3>

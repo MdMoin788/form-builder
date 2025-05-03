@@ -11,7 +11,7 @@ export class ResponseRoutes {
   }
 
   initializeRoutes() {
-    this.router.get("/", this.responseController.getResponses);
+    this.router.get("/:formId", this.responseController.getResponses);
 
     this.router.post(
       "/",

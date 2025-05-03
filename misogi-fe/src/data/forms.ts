@@ -20,6 +20,7 @@ export const getAllForms = () => {
 // --- Responses ---
 
 export const saveResponse = (slug: string | undefined, answers: { [key: string]: string }) => {
+  console.log('slug', slug);
   const normalizedSlug = slug?.trim().toLowerCase();
   if (!normalizedSlug) return;
 

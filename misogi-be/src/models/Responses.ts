@@ -1,8 +1,11 @@
+
+
 import { Document, Schema, model, Types } from 'mongoose';
 
 export interface IResponse extends Document {
-  formId: Types.ObjectId;
-  answers: { [key: string]: string };
+  formId?: Types.ObjectId; 
+  formSlug: string; 
+  answers: Map<string, string>; 
   email?: string;
   submittedAt: Date;
   createdAt: Date;
@@ -11,8 +14,13 @@ export interface IResponse extends Document {
 
 const ResponseSchema = new Schema<IResponse>(
   {
-    formId: { type: Schema.Types.ObjectId, ref: 'Form', required: true },
-    answers: { type: Schema.Types.Mixed, required: true },
+    formId: { type: Schema.Types.ObjectId, ref: 'Form' }, 
+    formSlug: { type: String, required: true }, 
+    answers: {
+      type: Map,
+      of: String,
+      required: true,
+    },
     email: { type: String },
     submittedAt: { type: Date, default: Date.now },
   },

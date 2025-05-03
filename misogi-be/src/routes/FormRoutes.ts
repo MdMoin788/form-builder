@@ -19,6 +19,11 @@ export class FormRoutes {
       this.formController.createForm,
     );
 
+    this.router.get(
+      "/getFormById/:formId",
+      this.formController.getFormById,
+    );
+
     this.router.delete(
       "/userForms",
 

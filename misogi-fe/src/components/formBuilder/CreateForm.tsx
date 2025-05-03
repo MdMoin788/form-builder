@@ -5,6 +5,8 @@ import FormCanvas from "./FormCanvas";
 import FieldEditor from "./FieldEditor";
 import PreviewForm from "./PreviewForm";
 import { saveForm } from "../../data/forms";
+import { createForm } from "../../services/api";
+import { getLocalStorage } from "../../utils/utils";
 
 const CreateFormInner = () => {
   const { fields } = useFormBuilder();
@@ -13,7 +15,7 @@ const CreateFormInner = () => {
     openDate: "",
     closeDate: "",
   });
-  const handlePublish = () => {
+  const handlePublish = async () => {
     const slug = prompt("Enter form slug (unique identifier):");
 
     if (!slug) return;
@@ -28,8 +30,19 @@ const CreateFormInner = () => {
         close: formSettings.closeDate || null,
       }
     });
-
-    saveForm(formSettings);  
+    await createForm({
+      slug,
+      title:slug,
+      userId: getLocalStorage("user", true)?._id,
+      fields,
+      responses: [],
+      password: formSettings.password || null,
+      schedule: {
+        open: formSettings.openDate || null,
+        close: formSettings.closeDate || null,
+      }
+    })
+    saveForm(formSettings);
     alert(`Form published! Access it at /f/${slug}`);
   };
 

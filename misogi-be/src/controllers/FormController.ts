@@ -43,5 +43,14 @@ export class FormController {
       next(err);
     }
   };
+
+  public getFormById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const forms = await this.formService.getFormById(req.params.formId);
+      sendResponse(res, 200, forms);
+    } catch (err) {
+      next(err);
+    }
+  };
  
 }

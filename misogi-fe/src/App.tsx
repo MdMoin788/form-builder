@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginBeforeMessage title="content" setIsLoggedIn={setIsLoggedIn} />} />
         {/* Public route (anyone can open) */}
-        <Route path="/f/:slug" element={<PublishedForm />} />
+        <Route path="/f/:slug/:formId" element={<PublishedForm />} />
         {/* Protected Routes */}
         <Route path="/" element={
           <ProtectedRoute>
@@ -35,7 +35,7 @@ function App() {
           </ProtectedRoute>
         } />
 
-        <Route path="/responses/:slug" element={
+        <Route path="/responses/:slug/:formId" element={
           <ProtectedRoute>
             <FormResponses />
           </ProtectedRoute>
