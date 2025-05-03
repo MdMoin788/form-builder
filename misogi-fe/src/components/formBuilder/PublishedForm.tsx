@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {  saveResponse } from "../../data/forms";
+import { saveResponse } from "../../data/forms";
 import { getFormById, saveFormResponse } from "../../services/api";
 import IsLoading from "../../screens/IsLoading";
+import { capitalizeWord } from "../../utils/utils";
 
 const PublishedForm = () => {
   const { slug, formId } = useParams();
@@ -89,12 +90,12 @@ const PublishedForm = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 space-y-6">
-      <h2 className="text-2xl font-bold mb-6">📋 Fill the Form</h2>
+      <h2 className="text-1xl font-bold mb-6"> {capitalizeWord(form?.slug)}</h2>
 
       {form.fields.map((field: any) =>
         isFieldVisible(field) ? (
           <div key={field.id} className="space-y-2">
-            <label className="block font-semibold">{field.label}</label>
+            <label className="block font-semibold text-start">{field.label}</label>
 
             {field.type === "text" ||
               field.type === "email" ||

@@ -21,14 +21,14 @@ function App() {
         <Route path="/" element={
           <ProtectedRoute>
             <div className="min-h-screen bg-gray-100 text-gray-800">
-              <nav className="bg-white p-4 shadow-md flex justify-between items-center">
-                <h1 className="text-xl font-bold">📋 Formulate</h1>
+              <nav className="bg-white py-2 px-1 shadow-md flex justify-between items-center">
+                <h1 className="text-xl font-bold">📋</h1>
                 <div className="space-x-4">
                   <Link to="/">Dashboard</Link>
                   <Link to="/create">Create Form</Link>
                 </div>
               </nav>
-              <main className="p-4 max-w-5xl mx-auto">
+              <main className="p-4 max-w-5xl mx-auto flex flex-col justify-center sm:w-100">
                 <Dashboard />
               </main>
             </div>

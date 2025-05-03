@@ -33,3 +33,11 @@ export const showToastMessage = (erroMessage: any, isSuccess: any = true) => {
     position: 'top-center'
   })
 }
+
+export const capitalizeWord = (slug: any) => {
+  if (!slug) return ''
+  return slug
+    .split('-')
+    .map((word: any) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
