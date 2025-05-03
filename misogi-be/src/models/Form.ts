@@ -19,6 +19,7 @@ export interface IForm extends Document {
   title?: string;
   fields: IFormField[];
   password?: string;
+  page: number;
   status: 'open' | 'closed' | 'scheduled';
   schedule?: {
     open?: Date;
@@ -39,6 +40,7 @@ const FormSchema = new Schema<IForm>(
         id: { type: String, required: true },
         type: { type: String, required: true },
         label: { type: String, required: true },
+        page: { type: Number, required: true },
         placeholder: { type: String },
         required: { type: Boolean },
         options: [{ type: String }],

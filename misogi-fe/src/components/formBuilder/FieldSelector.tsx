@@ -13,15 +13,20 @@ const FieldSelector = () => {
   const { addField } = useFormBuilder();
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {fields.map((field) => (
-        <button
-          key={field.type}
-          onClick={() => addField(field.type as any)}
-          className="w-full bg-gray-200 hover:bg-gray-300 rounded p-2 text-left"
-        >
-          ➕ {field.label}
-        </button>
+        <div className="flex justify-between border items-center rounded ">
+          <span className="ms-2">
+            {field.label}
+          </span>
+          <button
+            key={field.type}
+            onClick={() => addField(field.type as any)}
+            className=" bg-gray-200 hover:bg-gray-300 p-1 cursor-pointer"
+          >
+            ➕
+          </button>
+        </div>
       ))}
     </div>
   );

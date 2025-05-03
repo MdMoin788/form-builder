@@ -46,7 +46,7 @@ const FormCanvas = () => {
     return (
       <div
         ref={ref}
-        onClick={() => selectField(field.id)}
+        // onClick={() => selectField(field.id)}
         className={`flex items-center justify-between bg-white p-3 rounded shadow hover:shadow-md cursor-pointer transition ${
           isDragging ? "opacity-30" : "opacity-100"
         } ${selectedFieldId === field.id ? "ring-2 ring-blue-400" : ""}`}
@@ -58,9 +58,18 @@ const FormCanvas = () => {
         <button
           onClick={(e) => {
             e.stopPropagation();
+            selectField(field.id)
+          }}
+          className="text-red-500 hover:text-red-700 cursor-pointer"
+        >
+        🖊️
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
             removeField(field.id);
           }}
-          className="text-red-500 hover:text-red-700"
+          className="text-red-500 hover:text-red-700 cursor-pointer"
         >
           ✖️
         </button>
@@ -72,7 +81,7 @@ const FormCanvas = () => {
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-[200px] border-2 border-dashed border-gray-300 rounded p-4 space-y-4">
         {fields.length === 0 ? (
-          <p className="text-gray-400 text-center">Drag fields here to start building 🚀</p>
+          <p className="text-gray-400 text-center">Add fields here to start building form 🚀</p>
         ) : (
           fields.map((field, index) => (
             <DraggableField key={field.id} field={field} index={index} />

@@ -79,19 +79,18 @@ const FormResponses = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold mb-4">Responses Analytics → "{form.slug}"</h2>
-
       <div className="space-x-4 mb-6">
         <input
           type="date"
           value={dateFilter.from}
           onChange={(e) => setDateFilter({ ...dateFilter, from: e.target.value })}
-          className="border p-2 rounded"
+          className="border p-2 rounded mb-2"
         />
         <input
           type="date"
           value={dateFilter.to}
           onChange={(e) => setDateFilter({ ...dateFilter, to: e.target.value })}
-          className="border p-2 rounded"
+          className="border p-2 rounded mb-2"
         />
         <button
           onClick={exportCSV}

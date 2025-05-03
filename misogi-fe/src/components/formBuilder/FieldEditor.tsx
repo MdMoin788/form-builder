@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useFormBuilder } from "../../context/FormBuilderContext";
 
 const FieldEditor = () => {
@@ -18,7 +18,7 @@ const FieldEditor = () => {
 
   const handleSave = () => {
     updateField(field.id, localField);
-    selectField(null); // close editor
+    selectField(null); 
   };
 
   const handleChange = (key: string, value: any) => {
@@ -30,10 +30,10 @@ const FieldEditor = () => {
 
   return (
     <div className="fixed right-0 top-0 w-full md:w-[400px] h-full bg-white border-l shadow-lg p-6 space-y-4 overflow-y-auto z-50">
-      <h3 className="text-xl font-bold">Edit Field</h3>
+      <h3 className="text-xl font-bold">Field Validation</h3>
 
       <div>
-        <label className="block font-semibold mb-1">Label</label>
+        <label className="block font-semibold mb-1 text-start">Label</label>
         <input
           type="text"
           value={localField.label}
@@ -43,7 +43,7 @@ const FieldEditor = () => {
       </div>
 
       <div>
-        <label className="block font-semibold mb-1">Placeholder</label>
+        <label className="block font-semibold mb-1 text-start">Placeholder</label>
         <input
           type="text"
           value={localField.placeholder}
@@ -55,10 +55,11 @@ const FieldEditor = () => {
       <div className="flex items-center space-x-2">
         <input
           type="checkbox"
+          className="w-5 h-5"
           checked={localField.required}
           onChange={(e) => handleChange("required", e.target.checked)}
         />
-        <label>Required</label>
+        <label className="font-bold">Required</label>
       </div>
 
       {(localField.type === "dropdown" || localField.type === "checkbox") && (
@@ -98,7 +99,7 @@ const FieldEditor = () => {
 
       {/* Conditional Logic */}
       <div>
-        <label className="block font-semibold mb-1">Conditional Logic</label>
+        <label className="block font-semibold mb-1 text-start">Conditional Logic</label>
         <select
           value={localField.conditional?.fieldId || ""}
           onChange={(e) => {
@@ -131,6 +132,17 @@ const FieldEditor = () => {
             className="w-full border rounded p-2"
           />
         )}
+      </div>
+
+      <div>
+        <label className="block font-semibold mb-1 text-start">Page Number</label>
+        <input
+          type="number"
+          min="1"
+          value={localField.page ?? 1}
+          onChange={(e) => handleChange("page", parseInt(e.target.value))}
+          className="w-full border rounded p-2"
+        />
       </div>
 
       <div className="flex justify-end space-x-4 pt-6">

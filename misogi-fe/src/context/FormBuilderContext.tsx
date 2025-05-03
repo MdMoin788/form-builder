@@ -8,6 +8,7 @@ export interface FormField {
   required?: boolean;
   options?: string[];
   conditional?: { fieldId: string; value: string };
+  page: number,
 }
 
 interface FormBuilderContextProps {
@@ -40,9 +41,9 @@ export const FormBuilderProvider: React.FC<{ children: React.ReactNode }> = ({ c
         placeholder: "",
         required: false,
         options: type === "dropdown" || type === "checkbox" ? ["Option 1"] : undefined,
+        page:1
       };
       setFields((prev) => [...prev, newField]);
-      // FIX : pehle selectFieldId set ho raha tha -> ab nahi karenge
     };
   
     const updateField = (id: string, updatedField: Partial<FormField>) => {

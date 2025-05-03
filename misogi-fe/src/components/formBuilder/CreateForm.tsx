@@ -10,11 +10,13 @@ import { getLocalStorage } from "../../utils/utils";
 
 const CreateFormInner = () => {
   const { fields } = useFormBuilder();
+  
   const [formSettings, setFormSettings] = useState({
     password: "",
     openDate: "",
     closeDate: "",
   });
+
   const handlePublish = async () => {
     const slug = prompt("Enter form slug (unique identifier):");
 
@@ -51,7 +53,7 @@ const CreateFormInner = () => {
       <h2 className="text-2xl font-bold">Create Your Form</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-4 rounded shadow md:col-span-1">
+        <div className="bg-white p-4 rounded shadow md:col-span-2">
           <h3 className="font-semibold mb-3">Add Fields</h3>
           <FieldSelector />
         </div>
