@@ -9,15 +9,12 @@ import PublishedForm from './components/formBuilder/PublishedForm';
 import FormResponses from './components/formBuilder/FormResponses';
 
 function App() {
-  const [setIsLoggedIn] = useState(false);
 
   return (
     <div className="">
       <Routes>
-        <Route path="/login" element={<LoginBeforeMessage title="content" setIsLoggedIn={setIsLoggedIn} />} />
-        {/* Public route (anyone can open) */}
+        <Route path="/login" element={<LoginBeforeMessage title="content"  />} />
         <Route path="/f/:slug/:formId" element={<PublishedForm />} />
-        {/* Protected Routes */}
         <Route path="/" element={
           <ProtectedRoute>
             <div className="min-h-screen bg-gray-100 text-gray-800">

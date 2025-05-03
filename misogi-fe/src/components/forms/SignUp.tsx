@@ -27,11 +27,11 @@ const SignUp: React.FC<RegisterProps> = ({ onSuccess }) => {
         email,
         password,
       })
-      showToastMessage(response, true)
-      onSuccess();
       setLocalStorage("user", response?.data?.data, true)
       setLoading(false)
+      onSuccess();
       window.location.href = '/';
+      showToastMessage(response, true)
 
     } catch (error) {
       showToastMessage(error, false)

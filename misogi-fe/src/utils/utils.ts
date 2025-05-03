@@ -26,9 +26,9 @@ export const getLocalStorage = (keyName: string, isJson = false) => {
 export const showToastMessage = (erroMessage: any, isSuccess: any = true) => {
   let message = isSuccess
     ? erroMessage?.message
-    : erroMessage.response.data.message
-    ? erroMessage.response.data.message
-    : erroMessage.response.data.error?.message
+    : erroMessage.response?.data?.message
+    ? erroMessage.response?.data?.message
+    : erroMessage.response?.data?.error?.message
   toast?.[isSuccess ? 'success' : 'error'](message, {
     position: 'top-center'
   })

@@ -24,11 +24,11 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
         email,
         password,
       })
-      showToastMessage(response, true)
-      onSuccess();
       setLocalStorage("user", response?.data?.data, true)
       setLoading(false)
-    window.location.href = '/';
+      onSuccess();
+      window.location.href = '/';
+      showToastMessage(response, true)
     } catch (error) {
       showToastMessage(error, false)
     }

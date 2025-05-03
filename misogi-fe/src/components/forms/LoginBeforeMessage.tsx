@@ -3,12 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "./AuthForm";
 
-const LoginBeforeMessage = ({ title, setIsLoggedIn }: { title: string, setIsLoggedIn: any }) => {
+const LoginBeforeMessage = ({ title }: { title: string }) => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleAuthSuccess = () => {
         setIsModalOpen(false);
-        setIsLoggedIn(true);
         navigate('/');
     };
 
